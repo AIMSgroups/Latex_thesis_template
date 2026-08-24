@@ -1,13 +1,8 @@
 %%
 %% USFthesis.cls 2026 version V1.0
-%%   derived from SJSUthesis.cls 2018-12-21 V0.2 by David C. Anastasiu,
 %%   which was itself derived from IEEEtran.cls 2015/08/26 version V1.8b
 %%   by Michael Shell.
 %%
-%% MODIFIED FILE NOTICE (per LPPL 1.3): this file is a modified version of
-%% SJSUthesis.cls. It has been renamed and adapted for theses and
-%% dissertations at the University of South Florida. It is NOT the original
-%% SJSU class and is not endorsed by its original authors.
 %%
 %% Adapted for USF by: Nima Karimian
 %%   Bellini College of Artificial Intelligence, Cybersecurity and Computing
