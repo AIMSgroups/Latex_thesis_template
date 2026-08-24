@@ -1,324 +1,1058 @@
-@inproceedings{anastasiu-dsaa2016,
-   author    = {David C. Anastasiu and George Karypis},
-   title     = {Efficient Identification of Tanimoto Nearest Neighbors},
-   booktitle = {2016 IEEE International Conference on Data Science and Advanced Analytics (DSAA)},
-   series    = {DSAA '16},
-   year      = {2016},
-   pages     = {156-165},
-   location  = {Montr\'{e}al, Canada},
+
+% Journals
+
+% First the Full Name is given, then the abbreviation used in the AMS Math
+% Reviews, with an indication if it could not be found there.
+% Note the 2nd overwrites the 1st, so swap them if you want the full name.
+
+ %{AMS}
+ @String{AMSTrans = "American Mathematical Society Translations" }
+ @String{AMSTrans = "Amer. Math. Soc. Transl." }
+ @String{BullAMS = "Bulletin of the American Mathematical Society" }
+ @String{BullAMS = "Bull. Amer. Math. Soc." }
+ @String{ProcAMS = "Proceedings of the American Mathematical Society" }
+ @String{ProcAMS = "Proc. Amer. Math. Soc." }
+ @String{TransAMS = "Transactions of the American Mathematical Society" }
+ @String{TransAMS = "Trans. Amer. Math. Soc." }
+
+ %ACM
+ @String{CACM = "Communications of the {ACM}" }
+ @String{CACM = "Commun. {ACM}" }
+ @String{CompServ = "Comput. Surveys" }
+ @String{JACM = "J. ACM" }
+ @String{ACMMathSoft = "{ACM} Transactions on Mathematical Software" }
+ @String{ACMMathSoft = "{ACM} Trans. Math. Software" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newsletter" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newslett." }
+
+ @String{AmerSocio = "American Journal of Sociology" }
+ @String{AmerStatAssoc = "Journal of the American Statistical Association" }
+ @String{AmerStatAssoc = "J. Amer. Statist. Assoc." }
+ @String{ApplMathComp = "Applied Mathematics and Computation" }
+ @String{ApplMathComp = "Appl. Math. Comput." }
+ @String{AmerMathMonthly = "American Mathematical Monthly" }
+ @String{AmerMathMonthly = "Amer. Math. Monthly" }
+ @String{BIT = "{BIT}" }
+ @String{BritStatPsych = "British Journal of Mathematical and Statistical
+          Psychology" }
+ @String{BritStatPsych = "Brit. J. Math. Statist. Psych." }
+ @String{CanMathBull = "Canadian Mathematical Bulletin" }
+ @String{CanMathBull = "Canad. Math. Bull." }
+ @String{CompApplMath = "Journal of Computational and Applied Mathematics" }
+ @String{CompApplMath = "J. Comput. Appl. Math." }
+ @String{CompPhys = "Journal of Computational Physics" }
+ @String{CompPhys = "J. Comput. Phys." }
+ @String{CompStruct = "Computers and Structures" }
+ @String{CompStruct = "Comput. \& Structures" }
+ @String{CompJour = "The Computer Journal" }
+ @String{CompJour = "Comput. J." }
+ @String{CompSysSci = "Journal of Computer and System Sciences" }
+ @String{CompSysSci = "J. Comput. System Sci." }
+ @String{Computing = "Computing" }
+ @String{ContempMath = "Contemporary Mathematics" }
+ @String{ContempMath = "Contemp. Math." }
+ @String{Crelle = "Crelle's Journal" }
+ @String{GiornaleMath = "Giornale di Mathematiche" }
+ @String{GiornaleMath = "Giorn. Mat." } % didn't find in AMS MR., ibid.
+
+ %IEEE
+ @String{Computer = "{IEEE} Computer" }
+ @String{IEEETransComp = "{IEEE} Transactions on Computers" }
+ @String{IEEETransComp = "{IEEE} Trans. Comput." }
+ @String{IEEETransAC = "{IEEE} Transactions on Automatic Control" }
+ @String{IEEETransAC = "{IEEE} Trans. Automat. Control" }
+ @String{IEEESpec = "{IEEE} Spectrum" } % didn't find in AMS MR
+ @String{ProcIEEE = "Proceedings of the {IEEE}" }
+ @String{ProcIEEE = "Proc. {IEEE}" } % didn't find in AMS MR
+ @String{IEEETransAeroElec = "{IEEE} Transactions on Aerospace and Electronic
+     Systems" }
+ @String{IEEETransAeroElec = "{IEEE} Trans. Aerospace Electron. Systems" }
+
+ @String{IMANumerAna = "{IMA} Journal of Numerical Analysis" }
+ @String{IMANumerAna = "{IMA} J. Numer. Anal." }
+ @String{InfProcLet = "Information Processing Letters" }
+ @String{InfProcLet = "Inform. Process. Lett." }
+ @String{InstMathApp = "Journal of the Institute of Mathematics and
+     its Applications" }
+ @String{InstMathApp = "J. Inst. Math. Appl." }
+ @String{IntControl = "International Journal of Control" }
+ @String{IntControl = "Internat. J. Control" }
+ @String{IntNumerEng = "International Journal for Numerical Methods in
+     Engineering" }
+ @String{IntNumerEng = "Internat. J. Numer. Methods Engrg." }
+ @String{IntSuper = "International Journal of Supercomputing Applications" }
+ @String{IntSuper = "Internat. J. Supercomputing Applic." } % didn't find
+%% in AMS MR
+ @String{Kibernetika = "Kibernetika" }
+ @String{JResNatBurStand = "Journal of Research of the National Bureau
+     of Standards" }
+ @String{JResNatBurStand = "J. Res. Nat. Bur. Standards" }
+ @String{LinAlgApp = "Linear Algebra and its Applications" }
+ @String{LinAlgApp = "Linear Algebra Appl." }
+ @String{MathAnaAppl = "Journal of Mathematical Analysis and Applications" }
+ @String{MathAnaAppl = "J. Math. Anal. Appl." }
+ @String{MathAnnalen = "Mathematische Annalen" }
+ @String{MathAnnalen = "Math. Ann." }
+ @String{MathPhys = "Journal of Mathematical Physics" }
+ @String{MathPhys = "J. Math. Phys." }
+ @String{MathComp = "Mathematics of Computation" }
+ @String{MathComp = "Math. Comp." }
+ @String{MathScand = "Mathematica Scandinavica" }
+ @String{MathScand = "Math. Scand." }
+ @String{TablesAidsComp = "Mathematical Tables and Other Aids to Computation" }
+ @String{TablesAidsComp = "Math. Tables Aids Comput." }
+ @String{NumerMath = "Numerische Mathematik" }
+ @String{NumerMath = "Numer. Math." }
+ @String{PacificMath = "Pacific Journal of Mathematics" }
+ @String{PacificMath = "Pacific J. Math." }
+ @String{ParDistComp = "Journal of Parallel and Distributed Computing" }
+ @String{ParDistComp = "J. Parallel and Distrib. Comput." } % didn't find
+%% in AMS MR
+ @String{ParComputing = "Parallel Computing" }
+ @String{ParComputing = "Parallel Comput." }
+ @String{PhilMag = "Philosophical Magazine" }
+ @String{PhilMag = "Philos. Mag." }
+ @String{ProcNAS = "Proceedings of the National Academy of Sciences
+                    of the USA" }
+ @String{ProcNAS = "Proc. Nat. Acad. Sci. U. S. A." }
+ @String{Psychometrika = "Psychometrika" }
+ @String{QuartMath = "Quarterly Journal of Mathematics, Oxford, Series (2)" }
+ @String{QuartMath = "Quart. J. Math. Oxford Ser. (2)" }
+ @String{QuartApplMath = "Quarterly of Applied Mathematics" }
+ @String{QuartApplMath = "Quart. Appl. Math." }
+ @String{RevueInstStat = "Review of the International Statisical Institute" }
+ @String{RevueInstStat = "Rev. Inst. Internat. Statist." }
+
+ %SIAM
+ @String{JSIAM = "Journal of the Society for Industrial and Applied
+     Mathematics" }
+ @String{JSIAM = "J. Soc. Indust. Appl. Math." }
+ @String{JSIAMB = "Journal of the Society for Industrial and Applied
+     Mathematics, Series B, Numerical Analysis" }
+ @String{JSIAMB = "J. Soc. Indust. Appl. Math. Ser. B Numer. Anal." }
+ @String{SIAMAlgMeth = "{SIAM} Journal on Algebraic and Discrete Methods" }
+ @String{SIAMAlgMeth = "{SIAM} J. Algebraic Discrete Methods" }
+ @String{SIAMAppMath = "{SIAM} Journal on Applied Mathematics" }
+ @String{SIAMAppMath = "{SIAM} J. Appl. Math." }
+ @String{SIAMComp = "{SIAM} Journal on Computing" }
+ @String{SIAMComp = "{SIAM} J. Comput." }
+ @String{SIAMMatrix = "{SIAM} Journal on Matrix Analysis and Applications" }
+ @String{SIAMMatrix = "{SIAM} J. Matrix Anal. Appl." }
+ @String{SIAMNumAnal = "{SIAM} Journal on Numerical Analysis" }
+ @String{SIAMNumAnal = "{SIAM} J. Numer. Anal." }
+ @String{SIAMReview = "{SIAM} Review" }
+ @String{SIAMReview = "{SIAM} Rev." }
+ @String{SIAMSciStat = "{SIAM} Journal on Scientific and Statistical
+     Computing" }
+ @String{SIAMSciStat = "{SIAM} J. Sci. Statist. Comput." }
+
+ @String{SoftPracExp = "Software Practice and Experience" }
+ @String{SoftPracExp = "Software Prac. Experience" } % didn't find in AMS MR
+ @String{StatScience = "Statistical Science" }
+ @String{StatScience = "Statist. Sci." }
+ @String{Techno = "Technometrics" }
+ @String{USSRCompMathPhys = "{USSR} Computational Mathematics and Mathematical
+     Physics" }
+ @String{USSRCompMathPhys = "{U. S. S. R.} Comput. Math. and Math. Phys." }
+ @String{VLSICompSys = "Journal of {VLSI} and Computer Systems" }
+ @String{VLSICompSys = "J. {VLSI} Comput. Syst." }
+ @String{ZAngewMathMech = "Zeitschrift fur Angewandte Mathematik und
+     Mechanik" }
+ @String{ZAngewMathMech = "Z. Angew. Math. Mech." }
+ @String{ZAngewMathPhys = "Zeitschrift fur Angewandte Mathematik und Physik" }
+ @String{ZAngewMathPhys = "Z. Angew. Math. Phys." }
+
+% Publishers % ================================================= |
+
+ @String{Academic = "Academic Press" }
+ @String{ACMPress = "{ACM} Press" }
+ @String{AdamHilger = "Adam Hilger" }
+ @String{AddisonWesley = "Addison-Wesley" }
+ @String{AllynBacon = "Allyn and Bacon" }
+ @String{AMS = "American Mathematical Society" }
+ @String{Birkhauser = "Birkh{\"a}user" }
+ @String{CambridgePress = "Cambridge University Press" }
+ @String{Chelsea = "Chelsea" }
+ @String{ClaredonPress = "Claredon Press" }
+ @String{DoverPub = "Dover Publications" }
+ @String{Eyolles = "Eyolles" }
+ @String{HoltRinehartWinston = "Holt, Rinehart and Winston" }
+ @String{Interscience = "Interscience" }
+ @String{JohnsHopkinsPress = "The Johns Hopkins University Press" }
+ @String{JohnWileySons = "John Wiley and Sons" }
+ @String{Macmillan = "Macmillan" }
+ @String{MathWorks = "The Math Works Inc." }
+ @String{McGrawHill = "McGraw-Hill" }
+ @String{NatBurStd = "National Bureau of Standards" }
+ @String{NorthHolland = "North-Holland" }
+ @String{OxfordPress = "Oxford University Press" }  %address Oxford or London?
+ @String{PergamonPress = "Pergamon Press" }
+ @String{PlenumPress = "Plenum Press" }
+ @String{PrenticeHall = "Prentice-Hall" }
+ @String{SIAMPub = "{SIAM} Publications" }
+ @String{Springer = "Springer-Verlag" }
+ @String{TexasPress = "University of Texas Press" }
+ @String{VanNostrand = "Van Nostrand" }
+ @String{WHFreeman = "W. H. Freeman and Co." }
+
+%Entries
+
+@inproceedings{rombach2022high,
+  title={High-resolution image synthesis with latent diffusion models},
+  author={Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and Esser, Patrick and Ommer, Bj{\"o}rn},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={10684--10695},
+  year={2022}
 }
 
-@inproceedings{anastasiu2015,
-   author    = {David C. Anastasiu and Al M. Rashid and Andrea Tagarelli and George Karypis},
-   title     = {Understanding Computer Usage Evolution},
-   booktitle = {31st IEEE International Conference on Data Engineering},
-   series    = {ICDE 2015},
-   year      = {2015},
-   pages     = {1549-1560},
-   location  = {Seoul, Korea},
+@article{hu2022lora,
+  title={Lora: Low-rank adaptation of large language models.},
+  author={Hu, Edward J and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Liang and Chen, Weizhu and others},
+  journal={Iclr},
+  year={2022}
 }
 
-@inproceedings{anastasiu-idsc2017,
-   author    = {David C. Anastasiu},
-   title     = {Cosine Approximate Nearest Neighbors},
-   booktitle = {Data Science -- Analytics and Applications},
-   series    = {iDSC 2017},
-   year      = {2017},
-   pages     = {45-50},
-   publisher = {Springer Fachmedien Wiesbaden},
-   address   = {Wiesbaden},
-   location  = {Salzburg, Austria},
+
+@inproceedings{liu2024adv,
+  title={Adv-diffusion: imperceptible adversarial face identity attack via latent diffusion model},
+  author={Liu, Decheng and Wang, Xijun and Peng, Chunlei and Wang, Nannan and Hu, Ruimin and Gao, Xinbo},
+  booktitle={Proceedings of the AAAI conference on artificial intelligence},
+  volume={38},
+  number={4},
+  pages={3585--3593},
+  year={2024}
 }
 
-@inproceedings{anastasiu-icde2014,
-   author    = {David C. Anastasiu and George Karypis},
-   title     = {L2AP: Fast Cosine Similarity Search With Prefix L-2 Norm Bounds},
-   booktitle = {The 30th IEEE International Conference on Data Engineering},
-   series    = {ICDE 2014},
-   year      = {2014},
-   pages     = {784-795},
-   location  = {Chicago, USA},
+@inproceedings{wang2025adv,
+  title={Adv-cpg: A customized portrait generation framework with facial adversarial attacks},
+  author={Wang, Junying and Zhang, Hongyuan and Yuan, Yuan},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={21001--21010},
+  year={2025}
 }
 
-@inproceedings{anastasiu-sc2016,
-   author    = {David C. Anastasiu and George Karypis},
-   title     = {Fast Parallel Cosine K-Nearest Neighbor Graph Construction},
-   month     = {Nov},
-   booktitle = {2016 6th Workshop on Irregular Applications: Architecture and Algorithms (IA3)},
-   year      = {2016},
-   pages     = {50-53},
+@inproceedings{yang2021towards,
+  title={Towards face encryption by generating adversarial identity masks},
+  author={Yang, Xiao and Dong, Yinpeng and Pang, Tianyu and Su, Hang and Zhu, Jun and Chen, Yuefeng and Xue, Hui},
+  booktitle={Proceedings of the IEEE/CVF international conference on computer vision},
+  pages={3897--3907},
+  year={2021}
 }
 
-@inproceedings{anastasiu-sc2015,
-   author    = {David C. Anastasiu and George Karypis},
-   title     = {PL2AP: Fast Parallel Cosine Similarity Search},
-   booktitle = {Proceedings of the 5th Workshop on Irregular Applications: Architectures and Algorithms, in conjunction with SC'15},
-   series    = {IA3 2015},
-   year      = {2015},
-   pages     = {1-8},
-   publisher = {ACM},
-   address   = {New York, NY, USA},
-   location  = {Austin, TX, USA},
+@inproceedings{sun2024diffam,
+  title={Diffam: Diffusion-based adversarial makeup transfer for facial privacy protection},
+  author={Sun, Yuhao and Yu, Lingyun and Xie, Hongtao and Li, Jiaming and Zhang, Yongdong},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={24584--24594},
+  year={2024}
 }
 
-@inproceedings{kapoor-fie2018,
-   author    = {Manika Kapoor and Shuai Hua and David C. Anastasiu},
-   title     = {Improving Student Motivation through Competitive Active Learning},
-   month     = {October},
-   booktitle = {2018 IEEE Frontiers in Education Conference},
-   series    = {FIE 2018},
-   year      = {2018},
-   publisher = {IEEE},
-   location  = {San Jose, CA, USA},
+@inproceedings{he2016deep,
+  title={Deep residual learning for image recognition},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={770--778},
+  year={2016}
 }
 
-@article{chen2017, 
-    author={Y. Chen and C. Shen}, 
-    journal={IEEE Access}, 
-    title={Performance Analysis of Smartphone-Sensor Behavior for Human Activity Recognition}, 
-    year={2017}, 
-    volume={5}, 
-    number={}, 
-    pages={3095-3110}, 
-    keywords={motion measurement;sensors;smart phones;time-frequency analysis;wavelet transforms;smartphone-sensor behavior;human activity recognition;embedded sensor;ubiquitous platform;data analysis;data acquisition;motion-sensor behavior;sensory data sequence collection;cycle detection algorithm;frequency-domain feature;wavelet-domain feature;diverse classification algorithm;F-score;time domain feature;Activity recognition;Smart phones;Accelerometers;Feature extraction;Legged locomotion;Gyroscopes;Smartphone;motion sensor;behavior analysis;human activity recognition;performance analysis}, 
-    doi={10.1109/ACCESS.2017.2676168}, 
-    ISSN={2169-3536}, 
-    month={},
+@inproceedings{schroff2015facenet,
+  title={Facenet: A unified embedding for face recognition and clustering},
+  author={Schroff, Florian and Kalenichenko, Dmitry and Philbin, James},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={815--823},
+  year={2015}
 }
 
-@article{su2014, 
-    author={X. Su and H. Tong and P. Ji}, 
-    journal={Tsinghua Science and Technology}, 
-    title={Activity recognition with smartphone sensors}, 
-    year={2014}, 
-    volume={19}, 
-    number={3}, 
-    pages={235-249}, 
-    keywords={smart phones;ubiquitous computing;activity recognition;smartphone sensors;ubiquitous computing;high-impact applications;health monitoring;fitness monitoring;personal biometric signature;urban computing;assistive technology;elder-care;activity recognition;mobile sensors;machine learning;data mining;pattern recognition}, 
-    doi={10.1109/TST.2014.6838194}, 
-    ISSN={1007-0214}, 
-    month={June},
+@inproceedings{kumari2023multi,
+  title={Multi-concept customization of text-to-image diffusion},
+  author={Kumari, Nupur and Zhang, Bingliang and Zhang, Richard and Shechtman, Eli and Zhu, Jun-Yan},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={1931--1941},
+  year={2023}
 }
 
-@inproceedings{anguita2013,
-    author = {Anguita, Davide and Ghio, Alessandro and Oneto, Luca and Parra, Xavier and L Reyes-Ortiz, J},
-    year = {2013},
-    month = {01},
-    pages = {},
-    title = {A Public Domain Dataset for Human Activity Recognition using Smartphones},
-    booktitle = {European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning},
-    series = {ESANN 2013},
-    location = {Bruges, Belgium}
+@inproceedings{wu2024uniid,
+  title={UniID: Spoofing Face Authentication System by Universal Identity.},
+  author={Wu, Zhihao and Cheng, Yushi and Zhang, Shibo and Ji, Xiaoyu and Xu, Wenyuan},
+  booktitle={NDSS},
+  year={2024}
 }
 
-@article{kim2010, 
-    author={E. Kim and S. Helal and D. Cook}, 
-    journal={IEEE Pervasive Computing}, 
-    title={Human Activity Recognition and Pattern Discovery}, 
-    year={2010}, 
-    volume={9}, 
-    number={1}, 
-    pages={48-53}, 
-    keywords={hidden Markov models;pattern recognition;ubiquitous computing;human activity recognition;activity pattern discovery;human activity detection;pervasive system;sensor data;hidden Markov model;Humans;Pattern recognition;Medical services;Data analysis;Pattern analysis;Sensor systems;activity modeling;activity recognition;pattern discovery;pervasive computing}, 
-    doi={10.1109/MPRV.2010.7}, 
-    ISSN={1536-1268}, 
-    month={Jan},
+@inproceedings{huang2011efficient,
+  title={Efficient privacy-preserving biometric identification.},
+  author={Huang, Yan and Malka, Lior and Evans, David and Katz, Jonathan},
+  booktitle={NDSS},
+  volume={2011},
+  year={2011}
 }
 
-@article{bhattacharya2014,
-    title = "Using unlabeled data in a sparse-coding framework for human activity recognition",
-    journal = "Pervasive and Mobile Computing",
-    volume = "15",
-    pages = "242 - 262",
-    year = "2014",
-    note = "Special Issue on Information Management in Mobile Applications Special Issue on Data Mining in Pervasive Environments",
-    issn = "1574-1192",
-    doi = "https://doi.org/10.1016/j.pmcj.2014.05.006",
-    url = "http://www.sciencedirect.com/science/article/pii/S1574119214000820",
-    author = "Sourav Bhattacharya and Petteri Nurmi and Nils Hammerla and Thomas PlÃ¶tz",
-    keywords = "Activity recognition, Sparse-coding, Machine learning, Unsupervised learning"
+@inproceedings{kumari2026light2lie,
+  title={Light2Lie: Detecting Deepfake Images Using Physical Reflectance Laws.},
+  author={Kumari, Kavita and Behrouzi, Sasha and Pegoraro, Alessandro and Sadeghi, Ahmad-Reza},
+  booktitle={NDSS},
+  year={2026}
 }
 
-@inproceedings{yongmou2014,
-    author = {Li, Yongmou and Shi, Dianxi and Ding, Bo and Liu, Dongbo},
-    editor = {Prasath, Rajendra and O'Reilly, Philip and Kathirvalavakumar, T.},
-    title = {Unsupervised Feature Learning for Human Activity Recognition Using Smartphone Sensors},
-    booktitle = {Mining Intelligence and Knowledge Exploration},
-    year = {2014},
-    publisher = {Springer International Publishing},
-    address = {Cham},
-    pages = {99--107},
+@inproceedings{yu2023smack,
+  title={$\{$SMACK$\}$: Semantically meaningful adversarial audio attack},
+  author={Yu, Zhiyuan and Chang, Yuanhaur and Zhang, Ning and Xiao, Chaowei},
+  booktitle={32nd USENIX security symposium (USENIX security 23)},
+  pages={3799--3816},
+  year={2023}
 }
 
-@article{chamroukhi2013,
-    title= {Joint segmentation of multivariate time series with hidden process regression for human activity recognition},
-    author= {F. Chamroukhi and S. Mohammed and D. Trabelsi and L. Oukhellou and Y. Amirat},
-    journal= {Neurocomputing},
-    volume= {120},
-    pages= {633 - 644},
-    year= {2013},
-    note= {Image Feature Detection and Description},
-    issn= {0925-2312},
-    doi= {https://doi.org/10.1016/j.neucom.2013.04.003},
-    url= {http://www.sciencedirect.com/science/article/pii/S0925231213004086},
+@inproceedings{qiu2020semanticadv,
+  title={Semanticadv: Generating adversarial examples via attribute-conditioned image editing},
+  author={Qiu, Haonan and Xiao, Chaowei and Yang, Lei and Yan, Xinchen and Lee, Honglak and Li, Bo},
+  booktitle={European conference on computer vision},
+  pages={19--37},
+  year={2020},
+  organization={Springer}
 }
 
-@article{kwon2014,
-    title = {Unsupervised learning for human activity recognition using smartphone sensors},
-    journal = {Expert Systems with Applications},
-    volume = {41},
-    number = {14},
-    pages = {6067 - 6074},
-    year = {2014},
-    issn = {0957-4174},
-    doi = {https://doi.org/10.1016/j.eswa.2014.04.037},
-    url = {http://www.sciencedirect.com/science/article/pii/S0957417414002607},
-    author = {Yongjin Kwon and Kyuchang Kang and Changseok Bae},
+@inproceedings{zheng2024pi,
+  title={$\{$$\pi$-Jack$\}$:$\{$Physical-World$\}$ Adversarial Attack on Monocular Depth Estimation with Perspective Hijacking},
+  author={Zheng, Tianyue and Hu, Jingzhi and Tan, Rui and Zhang, Yinqian and He, Ying and Luo, Jun},
+  booktitle={33rd USENIX Security Symposium (USENIX Security 24)},
+  pages={7321--7338},
+  year={2024}
 }
 
-@inproceedings{ester1996,
-    author = {Ester, Martin and Kriegel, Hans-Peter and Sander, J\"{o}rg and Xu, Xiaowei},
-    title = {A Density-based Algorithm for Discovering Clusters a Density-based Algorithm for Discovering Clusters in Large Spatial Databases with Noise},
-    booktitle = {Proceedings of the Second International Conference on Knowledge Discovery and Data Mining},
-    series = {KDD'96},
-    year = {1996},
-    location = {Portland, Oregon},
-    pages = {226--231},
-    numpages = {6},
-    url = {http://dl.acm.org/citation.cfm?id=3001460.3001507},
-    acmid = {3001507},
-    publisher = {AAAI Press},
-    keywords = {arbitrary shape of clusters, clustering algorithms, efficiency on large spatial databases, handling noise},
-} 
-
-@inproceedings{wang2014, 
-    author={W. Wang and H. Liu and L. Yu and F. Sun}, 
-    booktitle={2014 International Joint Conference on Neural Networks (IJCNN)}, 
-    title={Human activity recognition using smart phone embedded sensors: A Linear Dynamical Systems method}, 
-    year={2014}, 
-    volume={}, 
-    number={}, 
-    pages={1185-1190}, 
-    keywords={feature extraction;health care;intelligent sensors;object recognition;pattern clustering;smart phones;time series;human activity recognition;smart phone embedded sensors;linear dynamical system method;time series;inertial sensors;action sequence;LDS;codebook;k-medoids clustering algorithm;bag-of-systems;BoS;feature design procedure;public dataset;health-aware smart phone system;Time series analysis;Feature extraction;Smart phones;Intelligent sensors;Sensor systems;Support vector machine classification}, 
-    doi={10.1109/IJCNN.2014.6889585}, 
-    ISSN={2161-4407}, 
-    month={July},
+@inproceedings{fang2024zero,
+  title={Zero-query adversarial attack on black-box automatic speech recognition systems},
+  author={Fang, Zheng and Wang, Tao and Zhao, Lingchen and Zhang, Shenyi and Li, Bowen and Ge, Yunjie and Li, Qi and Shen, Chao and Wang, Qian},
+  booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+  pages={630--644},
+  year={2024}
 }
 
-@inproceedings{ronao2015,
-    author = {Ronao, Charissa Ann and Cho, Sung-Bae},
-    editor = {Arik, Sabri and Huang, Tingwen and Lai, Weng Kin and Liu, Qingshan},
-    title = {Deep Convolutional Neural Networks for Human Activity Recognition with Smartphone Sensors},
-    booktitle = {Neural Information Processing},
-    year = {2015},
-    publisher = {Springer International Publishing},
-    address = {Cham},
-    pages = {46--53},
+@inproceedings{yang2024mma,
+  title={Mma-diffusion: Multimodal attack on diffusion models},
+  author={Yang, Yijun and Gao, Ruiyuan and Wang, Xiaosen and Ho, Tsung-Yi and Xu, Nan and Xu, Qiang},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={7737--7746},
+  year={2024}
 }
 
-@inproceedings{gjoreski2017,
-    author = {Gjoreski, Hristijan and Roggen, Daniel},
-    title = {Unsupervised Online Activity Discovery Using Temporal Behaviour Assumption},
-    booktitle = {Proceedings of the 2017 ACM International Symposium on Wearable Computers},
-    series = {ISWC '17},
-    year = {2017},
-    isbn = {978-1-4503-5188-1},
-    location = {Maui, Hawaii},
-    pages = {42--49},
-    numpages = {8},
-    url = {http://doi.acm.org/10.1145/3123021.3123044},
-    doi = {10.1145/3123021.3123044},
-    acmid = {3123044},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    keywords = {accelerometer, activity discovery, activity recognition, online temporal clustering, segmentation},
+@inproceedings{kim2024scores,
+  title={Scores tell everything about bob: Non-adaptive face reconstruction on face recognition systems},
+  author={Kim, Sunpill and Tan, Yong Kiam and Jeong, Bora and Mondal, Soumik and Aung, Khin Mi Mi and Seo, Jae Hong},
+  booktitle={2024 IEEE Symposium on Security and Privacy (SP)},
+  pages={1684--1702},
+  year={2024},
+  organization={IEEE}
 }
 
-@article{abonyi2005,
-    author = {Abonyi, Janos and Feil, Balazs and Nemeth, Sandor and Arva, Peter},
-    title = {Modified Gath--Geva Clustering for Fuzzy Segmentation of Multivariate Time-series},
-    journal = {Fuzzy Sets Syst.},
-    issue_date = {January, 2005},
-    volume = {149},
-    number = {1},
-    month = jan,
-    year = {2005},
-    issn = {0165-0114},
-    pages = {39--56},
-    numpages = {18},
-    url = {http://dx.doi.org/10.1016/j.fss.2004.07.008},
-    doi = {10.1016/j.fss.2004.07.008},
-    acmid = {1708975},
-    publisher = {Elsevier North-Holland, Inc.},
-    address = {Amsterdam, The Netherlands, The Netherlands},
-    keywords = {Fuzzy clustering, Process monitoring, Time-series segmentation},
-} 
-
-@article{wang2012,
-    author = {Wang, Nini and Liu, Xiaodong and Yin, Jianchuan},
-    title = {Improved Gath--Geva clustering for fuzzy segmentation of hydrometeorological time series},
-    journal = {Stochastic Environmental Research and Risk Assessment},
-    year = {2012},
-    month = {Jan},
-    day = {01},
-    volume = {26},
-    number = {1},
-    pages = {139--155},
-    abstract = {In this paper, an improved Gath--Geva clustering algorithm is proposed for automatic fuzzy segmentation of univariate and multivariate hydrometeorological time series. The algorithm considers time series segmentation problem as Gath--Geva clustering with the minimum message length criterion as segmentation order selection criterion. One characteristic of the improved Gath--Geva clustering algorithm is its unsupervised nature which can automatically determine the optimal segmentation order. Another characteristic is the application of the modified component-wise expectation maximization algorithm in Gath--Geva clustering which can avoid the drawbacks of the classical expectation maximization algorithm: the sensitivity to initialization and the need to avoid the boundary of the parameter space. The other characteristic is the improvement of numerical stability by integrating segmentation order selection into model parameter estimation procedure. The proposed algorithm has been experimentally tested on artificial and hydrometeorological time series. The obtained experimental results show the effectiveness of our proposed algorithm.},
-    issn = {1436-3259},
-    doi = {10.1007/s00477-011-0542-0},
-    url = {https://doi.org/10.1007/s00477-011-0542-0}
+@inproceedings{deng2019arcface,
+  title={Arcface: Additive angular margin loss for deep face recognition},
+  author={Deng, Jiankang and Guo, Jia and Xue, Niannan and Zafeiriou, Stefanos},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={4690--4699},
+  year={2019}
 }
 
-@article{kehagias2006,
-	author={Kehagias, Ath. and Nidelkou, Ev. and Petridis, V.},
-	title={A dynamic programming segmentation procedure for hydrological and environmental time series},
-	journal={Stochastic Environmental Research and Risk Assessment},
-	year={2006},
-	volume={20},
-	number={1-2},
-	publisher={Springer-Verlag},
-	pages={77-94},
+@article{karras2017progressive,
+  title={Progressive growing of gans for improved quality, stability, and variation},
+  author={Karras, Tero and Aila, Timo and Laine, Samuli and Lehtinen, Jaakko},
+  journal={arXiv preprint arXiv:1710.10196},
+  year={2017}
 }
 
-@article{guo2014,
-	author={Guo, Hongyue and Liu, Xiaodong and Song, Lixin},
-	title={Dynamic programming approach for segmentation of multivariate time series},
-	journal={Stochastic Environmental Research and Risk Assessment},
-	year={2014},
-	publisher={Springer Berlin Heidelberg},
-	pages={1-9},
+@inproceedings{karras2019style,
+  title={A style-based generator architecture for generative adversarial networks},
+  author={Karras, Tero and Laine, Samuli and Aila, Timo},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={4401--4410},
+  year={2019}
 }
 
-@article{guo2015,
-    author = {Guo, Hongyue and Liu, Xiaodong and Song, Lixin},
-    title = {Dynamic programming approach for segmentation of multivariate time series},
-    journal = {Stochastic Environmental Research and Risk Assessment},
-    year = {2015},
-    month = {Jan},
-    day = {01},
-    volume = {29},
-    number = {1},
-    pages = {265--273},
-    abstract = {In this paper, dynamic programming (DP) algorithm is applied to automatically segment multivariate time series. The definition and recursive formulation of segment errors of univariate time series are extended to multivariate time series, so that DP algorithm is computationally viable for multivariate time series. The order of autoregression and segmentation are simultaneously determined by Schwarz's Bayesian information criterion. The segmentation procedure is evaluated with artificially synthesized and hydrometeorological multivariate time series. Synthetic multivariate time series are generated by threshold autoregressive model, and in real-world multivariate time series experiment we propose that besides the regression by constant, autoregression should be taken into account. The experimental studies show that the proposed algorithm performs well.},
-    issn = {1436-3259},
-    doi = {10.1007/s00477-014-0897-0},
-    url = {https://doi.org/10.1007/s00477-014-0897-0}
+@inproceedings{shamshad2023clip2protect,
+  title={Clip2protect: Protecting facial privacy using text-guided makeup via adversarial latent search},
+  author={Shamshad, Fahad and Naseer, Muzammal and Nandakumar, Karthik},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={20595--20605},
+  year={2023}
 }
 
-@article{guo2016,
-    author = {Guo, Hongyue and Liu, Xiaodong},
-    title = {Dynamic programming-based optimization for segmentation and clustering of hydrometeorological time series},
-    journal = {Stochastic Environmental Research and Risk Assessment},
-    year = {2016},
-    month = {Oct},
-    day = {01},
-    volume = {30},
-    number = {7},
-    pages = {1875--1887},
-    abstract = {In this study, we propose a new segmentation algorithm to partition univariate and multivariate time series, where fuzzy clustering is realized for the segments formed in this way. The clustering algorithm involves a new objective function, which incorporates an extra variable related to segmentation, while dynamic time warping (DTW) is applied to determine distances between non-equal-length series. As optimizing the introduced objective function is a challenging task, we put forward an effective approach using dynamic programming (DP) algorithm. When calculating the DTW distance, a DP-based method is developed to reduce the computational complexity. In a series of experiments, both synthetic and real-world time series are used to evaluate the performance of the proposed algorithm. The results demonstrate higher effectiveness and advantages of the constructed algorithm when compared with the existing segmentation approaches.},
-    issn = {1436-3259},
-    doi = {10.1007/s00477-015-1192-4},
-    url = {https://doi.org/10.1007/s00477-015-1192-4}
+
+
+
+
+@inproceedings{hu2018squeeze,
+  title={Squeeze-and-excitation networks},
+  author={Hu, Jie and Shen, Li and Sun, Gang},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={7132--7141},
+  year={2018}
 }
 
+@article{jia2022adv,
+  title={Adv-attribute: Inconspicuous and transferable adversarial attack on face recognition},
+  author={Jia, Shuai and Yin, Bangjie and Yao, Taiping and Ding, Shouhong and Shen, Chunhua and Yang, Xiaokang and Ma, Chao},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={34136--34147},
+  year={2022}
+}
+
+
+@article{huang2023region,
+  title={Region-aware diffusion for zero-shot text-driven image editing},
+  author={Huang, Nisha and Tang, Fan and Dong, Weiming and Lee, Tong-Yee and Xu, Changsheng},
+  journal={arXiv preprint arXiv:2302.11797},
+  year={2023}
+}
+
+
+@inproceedings{mi2024privacy,
+  title={Privacy-preserving face recognition using trainable feature subtraction},
+  author={Mi, Yuxi and Zhong, Zhizhou and Huang, Yuge and Ji, Jiazhen and Xu, Jianqing and Wang, Jun and Wang, Shaoming and Ding, Shouhong and Zhou, Shuigeng},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={297--307},
+  year={2024}
+}
+
+@article{zhang2018facial,
+  title={From facial expression recognition to interpersonal relation prediction},
+  author={Zhang, Zhanpeng and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},
+  journal={International Journal of Computer Vision},
+  volume={126},
+  number={5},
+  pages={550--569},
+  year={2018},
+  publisher={Springer}
+}
+
+
+@inproceedings{pinto2011scaling,
+  title={Scaling up biologically-inspired computer vision: A case study in unconstrained face recognition on facebook},
+  author={Pinto, Nicolas and Stone, Zak and Zickler, Todd and Cox, David},
+  booktitle={CVPR 2011 workshops},
+  pages={35--42},
+  year={2011},
+  organization={IEEE}
+}
+
+@inproceedings{wang2025nullswap,
+  title={Nullswap: Proactive identity cloaking against deepfake face swapping},
+  author={Wang, Tianyi and Niu, Shuaicheng and Cheng, Harry and Zhang, Xiao and Wang, Yinglong},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={9945--9954},
+  year={2025}
+}
+
+@inproceedings{wenger2023sok,
+  title={Sok: Anti-facial recognition technology},
+  author={Wenger, Emily and Shan, Shawn and Zheng, Haitao and Zhao, Ben Y},
+  booktitle={2023 IEEE Symposium on Security and Privacy (SP)},
+  pages={864--881},
+  year={2023},
+  organization={IEEE}
+}
+
+@article{almeida2022ethics,
+  title={The ethics of facial recognition technologies, surveillance, and accountability in an age of artificial intelligence: a comparative analysis of US, EU, and UK regulatory frameworks},
+  author={Almeida, Denise and Shmarko, Konstantin and Lomas, Elizabeth},
+  journal={AI and Ethics},
+  volume={2},
+  number={3},
+  pages={377--387},
+  year={2022},
+  publisher={Springer}
+}
+
+@inproceedings{fan2020sparse,
+  title={Sparse adversarial attack via perturbation factorization},
+  author={Fan, Yanbo and Wu, Baoyuan and Li, Tuanhui and Zhang, Yong and Li, Mingyang and Li, Zhifeng and Yang, Yujiu},
+  booktitle={European conference on computer vision},
+  pages={35--50},
+  year={2020},
+  organization={Springer}
+}
+
+@article{wei2025distributionally,
+  title={Distributionally location-aware transferable adversarial patches for facial images},
+  author={Wei, Xingxing and Ruan, Shouwei and Dong, Yinpeng and Su, Hang and Cao, Xiaochun},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume={47},
+  number={4},
+  pages={2849--2864},
+  year={2025},
+  publisher={IEEE}
+}
+
+@inproceedings{wang2023privacy,
+  title={Privacy-preserving adversarial facial features},
+  author={Wang, Zhibo and Wang, He and Jin, Shuaifan and Zhang, Wenwen and Hu, Jiahui and Wang, Yan and Sun, Peng and Yuan, Wei and Liu, Kaixin and Ren, Kui},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={8212--8221},
+  year={2023}
+}
+
+@article{chhabra2025pridentity,
+  title={PrIdentity: Generalizable Privacy Preserving Adversarial Perturbations for Anonymizing Facial Identity},
+  author={Chhabra, Saheb and Thakral, Kartik and Singh, Richa and Vatsa, Mayank},
+  journal={IEEE Transactions on Biometrics, Behavior, and Identity Science},
+  year={2025},
+  publisher={IEEE}
+}
+
+@article{mirjalili2020privacynet,
+  title={PrivacyNet: Semi-adversarial networks for multi-attribute face privacy},
+  author={Mirjalili, Vahid and Raschka, Sebastian and Ross, Arun},
+  journal={IEEE Transactions on Image Processing},
+  volume={29},
+  pages={9400--9412},
+  year={2020},
+  publisher={IEEE}
+}
+
+
+@inproceedings{wu2018towards,
+  title={Towards privacy-preserving visual recognition via adversarial training: A pilot study},
+  author={Wu, Zhenyu and Wang, Zhangyang and Wang, Zhaowen and Jin, Hailin},
+  booktitle={Proceedings of the European conference on computer vision (ECCV)},
+  pages={606--624},
+  year={2018}
+}
+
+@article{ma2023transferable,
+  title={Transferable black-box attack against face recognition with spatial mutable adversarial patch},
+  author={Ma, Haotian and Xu, Ke and Jiang, Xinghao and Zhao, Zeyu and Sun, Tanfeng},
+  journal={IEEE Transactions on Information Forensics and Security},
+  volume={18},
+  pages={5636--5650},
+  year={2023},
+  publisher={IEEE}
+}
+
+@inproceedings{wang2022patchnet,
+  title={Patchnet: A simple face anti-spoofing framework via fine-grained patch recognition},
+  author={Wang, Chien-Yi and Lu, Yu-Ding and Yang, Shang-Ta and Lai, Shang-Hong},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={20281--20290},
+  year={2022}
+}
+
+@inproceedings{xie2019improving,
+  title={Improving transferability of adversarial examples with input diversity},
+  author={Xie, Cihang and Zhang, Zhishuai and Zhou, Yuyin and Bai, Song and Wang, Jianyu and Ren, Zhou and Yuille, Alan L},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={2730--2739},
+  year={2019}
+}
+
+
+
+@inproceedings{chow2024personalized,
+  title={Personalized privacy protection mask against unauthorized facial recognition},
+  author={Chow, Ka-Ho and Hu, Sihao and Huang, Tiansheng and Liu, Ling},
+  booktitle={European Conference on Computer Vision},
+  pages={434--450},
+  year={2024},
+  organization={Springer}
+}
+
+@inproceedings{shamshad2024makeup,
+  title={Makeup-guided facial privacy protection via untrained neural network priors},
+  author={Shamshad, Fahad and Naseer, Muzammal and Nandakumar, Karthik},
+  booktitle={European Conference on Computer Vision},
+  pages={227--246},
+  year={2024},
+  organization={Springer}
+}
+
+@inproceedings{wang2025diffusion,
+  title={Diffusion-based adversarial identity manipulation for facial privacy protection},
+  author={Wang, Liqin and Hu, Qianyue and Lu, Wei and Luo, Xiangyang},
+  booktitle={Proceedings of the 33rd ACM International Conference on Multimedia},
+  pages={11562--11571},
+  year={2025}
+}
+
+@inproceedings{li2025transferable,
+  title={Transferable adversarial face attack with text controlled attribute},
+  author={Li, Wenyun and Zhang, Zheng and Lan, Xiangyuan and Jiang, Dongmei},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={5},
+  pages={4977--4985},
+  year={2025}
+}
+
+@inproceedings{feng2023dynamic,
+  title={Dynamic generative targeted attacks with pattern injection},
+  author={Feng, Weiwei and Xu, Nanqing and Zhang, Tianzhu and Zhang, Yongdong},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={16404--16414},
+  year={2023}
+}
+
+@article{wei2022adversarial,
+  title={Adversarial sticker: A stealthy attack method in the physical world},
+  author={Wei, Xingxing and Guo, Ying and Yu, Jie},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume={45},
+  number={3},
+  pages={2711--2725},
+  year={2022},
+  publisher={IEEE}
+}
+
+@article{wei2022simultaneously,
+  title={Simultaneously optimizing perturbations and positions for black-box adversarial patch attacks},
+  author={Wei, Xingxing and Guo, Ying and Yu, Jie and Zhang, Bo},
+  journal={IEEE transactions on pattern analysis and machine intelligence},
+  volume={45},
+  number={7},
+  pages={9041--9054},
+  year={2022},
+  publisher={IEEE}
+}
+
+@inproceedings{yang2023towards,
+  title={Towards effective adversarial textured 3d meshes on physical face recognition},
+  author={Yang, Xiao and Liu, Chang and Xu, Longlong and Wang, Yikai and Dong, Yinpeng and Chen, Ning and Su, Hang and Zhu, Jun},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={4119--4128},
+  year={2023}
+}
+
+@article{wei2025real,
+  title={Real-world adversarial defense against patch attacks based on diffusion model},
+  author={Wei, Xingxing and Kang, Caixin and Dong, Yinpeng and Wang, Zhengyi and Ruan, Shouwei and Chen, Yubo and Su, Hang},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2025},
+  publisher={IEEE}
+}
+
+
+@article{huang2022fakelocator,
+  title={Fakelocator: Robust localization of gan-based face manipulations},
+  author={Huang, Yihao and Juefei-Xu, Felix and Guo, Qing and Liu, Yang and Pu, Geguang},
+  journal={IEEE Transactions on Information Forensics and Security},
+  volume={17},
+  pages={2657--2672},
+  year={2022},
+  publisher={IEEE}
+}
+
+@article{liu2023gan,
+  title={Gan-based facial attribute manipulation},
+  author={Liu, Yunfan and Li, Qi and Deng, Qiyao and Sun, Zhenan and Yang, Ming-Hsuan},
+  journal={IEEE transactions on pattern analysis and machine intelligence},
+  volume={45},
+  number={12},
+  pages={14590--14610},
+  year={2023},
+  publisher={IEEE}
+}
+
+@article{huang2020pfa,
+  title={PFA-GAN: Progressive face aging with generative adversarial network},
+  author={Huang, Zhizhong and Chen, Shouzhen and Zhang, Junping and Shan, Hongming},
+  journal={IEEE Transactions on Information Forensics and Security},
+  volume={16},
+  pages={2031--2045},
+  year={2020},
+  publisher={IEEE}
+}
+
+
+@article{liu2023diffprotect,
+  title={Diffprotect: Generate adversarial examples with diffusion models for facial privacy protection},
+  author={Liu, Jiang and Lau, Chun Pong and Chellappa, Rama},
+  journal={arXiv preprint arXiv:2305.13625},
+  year={2023}
+}
+
+
+@inproceedings{kim2023dcface,
+  title={Dcface: Synthetic face generation with dual condition diffusion model},
+  author={Kim, Minchul and Liu, Feng and Jain, Anil and Liu, Xiaoming},
+  booktitle={Proceedings of the ieee/cvf conference on computer vision and pattern recognition},
+  pages={12715--12725},
+  year={2023}
+}
+
+@inproceedings{stypulkowski2024diffused,
+  title={Diffused heads: Diffusion models beat gans on talking-face generation},
+  author={Stypu{\l}kowski, Micha{\l} and Vougioukas, Konstantinos and He, Sen and Zi{\k{e}}ba, Maciej and Petridis, Stavros and Pantic, Maja},
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages={5091--5100},
+  year={2024}
+}
+
+
+
+@inproceedings{ho2020denoising,
+  title={Denoising Diffusion Probabilistic Models},
+  author={Ho, Jonathan and Jain, Ajay and Abbeel, Pieter},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2020}
+}
+
+@inproceedings{song2020score,
+  title={Score-Based Generative Modeling through Stochastic Differential Equations},
+  author={Song, Yang and Sohl-Dickstein, Jascha and Kingma, Diederik P and Kumar, Abhishek and Ermon, Stefano and Poole, Ben},
+  booktitle={International Conference on Learning Representations},
+  year={2021}
+}
+
+@article{dhariwal2021diffusion,
+  title={Diffusion models beat gans on image synthesis},
+  author={Dhariwal, Prafulla and Nichol, Alexander},
+  journal={Advances in neural information processing systems},
+  volume={34},
+  pages={8780--8794},
+  year={2021}
+}
+
+@inproceedings{rombach2022ldm,
+  title={High-Resolution Image Synthesis with Latent Diffusion Models},
+  author={Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and Esser, Patrick and Ommer, Björn},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022}
+}
+
+@misc{podell2023sdxl,
+  title={SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis},
+  author={Podell, David and others},
+  year={2023},
+  howpublished={arXiv preprint arXiv:2307.01952}
+}
+
+
+@inproceedings{mou2023t2iadapter,
+  title={T2I-Adapters: Learning Adapters to Dig out More Controllable Ability for Text-to-Image Diffusion Models},
+  author={Mou, Chong and Ye, Hongzhi and Li, Jiaming and Zeng, Ailin and Cao, Yang and Xu, Qiang and Lu, Lewei and Zhu, Jifeng},
+  booktitle={IEEE International Conference on Computer Vision (ICCV)},
+  year={2023}
+}
+
+@inproceedings{ruiz2023dreambooth,
+  title={DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation},
+  author={Ruiz, Nataniel and Li, Yuanzhen and Jampani, Varun and Pritch, Yael and Rubinstein, Michael and Aberman, Kfir},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2023}
+}
+
+@misc{wang2023instantid,
+  title={InstantID: Zero-Shot Identity-Preserving Generation in Diffusion Models},
+  author={Wang, Yujun and Wu, Yifan and Zhang, Zhen and others},
+  year={2023},
+  howpublished={arXiv preprint arXiv:2311.17024}
+}
+
+@inproceedings{goodfellow2015explaining,
+  title={Explaining and Harnessing Adversarial Examples},
+  author={Goodfellow, Ian J and Shlens, Jonathon and Szegedy, Christian},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2015}
+}
+
+@inproceedings{madry2018towards,
+  title={Towards Deep Learning Models Resistant to Adversarial Attacks},
+  author={Madry, Aleksander and Makelov, Aleksandar and Schmidt, Ludwig and Tsipras, Dimitris and Vladu, Adrian},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2018}
+}
+
+@inproceedings{an2023imu,
+  title={Imu: Physical impersonating attack for face recognition system with natural style changes},
+  author={An, Shengwei and Yao, Yuan and Xu, Qixun and Ma, Shiqing and Tao, Guanhong and Cheng, Siyuan and Liu, Jian and Zhang, Xiangyu},
+  booktitle={2023 IEEE Symposium on Security and Privacy (SP)},
+  pages={899--916},
+  year={2023},
+  organization={IEEE}
+}
+
+@inproceedings{dong2018boosting,
+  title={Boosting adversarial attacks with momentum},
+  author={Dong, Yinpeng and Liao, Fangzhou and Pang, Tianyu and Su, Hang and Zhu, Jun and Hu, Xiaolin and Li, Jianguo},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={9185--9193},
+  year={2018}
+}
+
+@inproceedings{sharif2016accessorize,
+  title={Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition},
+  author={Sharif, Mahmood and Bhagavatula, Sruti and Bauer, Lujo and Reiter, Michael K},
+  booktitle={Proceedings of the 2016 acm sigsac conference on computer and communications security},
+  pages={1528--1540},
+  year={2016}
+}
+
+
+@inproceedings{zolfi2022adversarial,
+  title={Adversarial mask: Real-world universal adversarial attack on face recognition models},
+  author={Zolfi, Alon and Avidan, Shai and Elovici, Yuval and Shabtai, Asaf},
+  booktitle={Joint European Conference on Machine Learning and Knowledge Discovery in Databases},
+  pages={304--320},
+  year={2022},
+  organization={Springer}
+}
+
+
+
+@inproceedings{zhong2022opadv,
+  title={OpAdv: Adversarial Face Examples with Identity Preservation in Latent Space},
+  author={Zhong, Yifan and others},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2022}
+}
+
+@inproceedings{xu2023stealthid,
+  title={StealthID: Semantically Coherent Adversarial Face Generation},
+  author={Xu, Junhao and others},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2023}
+}
+
+@inproceedings{zhu2023unrestricted,
+  title={Unrestricted Adversarial Examples via Diffusion Models},
+  author={Zhu, Jiaming and others},
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2023}
+}
+
+
+
+@article{balaji2022ediff,
+  title={ediff-i: Text-to-image diffusion models with an ensemble of expert denoisers},
+  author={Balaji, Yogesh and Nah, Seungjun and Huang, Xun and Vahdat, Arash and Song, Jiaming and Zhang, Qinsheng and Kreis, Karsten and Aittala, Miika and Aila, Timo and Laine, Samuli and others},
+  journal={arXiv preprint arXiv:2211.01324},
+  year={2022}
+}
+
+
+
+@inproceedings{Composer,
+author = {Huang, Lianghua and Chen, Di and Liu, Yu and Shen, Yujun and Zhao, Deli and Zhou, Jingren},
+title = {Composer: creative and controllable image synthesis with composable conditions},
+year = {2023},
+publisher = {JMLR.org},
+abstract = {Recent large-scale generative models learned on big data are capable of synthesizing incredible images yet suffer from limited controllability. This work offers a new generation paradigm that allows flexible control of the output image, such as spatial layout and palette, while maintaining the synthesis quality and model creativity. With compositionality as the core idea, we first decompose an image into representative factors, and then train a diffusion model with all these factors as the conditions to recompose the input. At the inference stage, the rich intermediate representations work as composable elements, leading to a huge design space (i.e., exponentially proportional to the number of decomposed factors) for customizable content creation. It is noteworthy that our approach, which we call Composer, supports various levels of conditions, such as text description as the global information, depth map and sketch as the local guidance, color histogram for low-level details, etc. Besides improving controllability, we confirm that Composer serves as a general framework and facilitates a wide range of classical generative tasks without retraining. Code and models will be made available.},
+booktitle = {Proceedings of the 40th International Conference on Machine Learning},
+articleno = {558},
+numpages = {21},
+location = {Honolulu, Hawaii, USA},
+series = {ICML'23}
+}
+
+@article{nichol2021glide,
+  title={Glide: Towards photorealistic image generation and editing with text-guided diffusion models},
+  author={Nichol, Alex and Dhariwal, Prafulla and Ramesh, Aditya and Shyam, Pranav and Mishkin, Pamela and McGrew, Bob and Sutskever, Ilya and Chen, Mark},
+  journal={arXiv preprint arXiv:2112.10741},
+  year={2021}
+}
+
+
+@article{ramesh2022hierarchical,
+  title={Hierarchical text-conditional image generation with clip latents},
+  author={Ramesh, Aditya and Dhariwal, Prafulla and Nichol, Alex and Chu, Casey and Chen, Mark},
+  journal={arXiv preprint arXiv:2204.06125},
+  year={2022}
+}
+
+
+@article{saharia2022photorealistic,
+  title={Photorealistic text-to-image diffusion models with deep language understanding},
+  author={Saharia, Chitwan and Chan, William and Saxena, Saurabh and Li, Lala and Whang, Jay and Denton, Emily L and Ghasemipour, Kamyar and Gontijo Lopes, Raphael and Karagol Ayan, Burcu and Salimans, Tim and others},
+  journal={Advances in neural information processing systems},
+  volume={35},
+  pages={36479--36494},
+  year={2022}
+}
+
+
+@article{cherepanova2021lowkey,
+  title={Lowkey: Leveraging adversarial attacks to protect social media users from facial recognition},
+  author={Cherepanova, Valeriia and Goldblum, Micah and Foley, Harrison and Duan, Shiyuan and Dickerson, John and Taylor, Gavin and Goldstein, Tom},
+  journal={arXiv preprint arXiv:2101.07922},
+  year={2021}
+}
+
+@inproceedings{shan2020fawkes,
+  title={Fawkes: Protecting privacy against unauthorized deep learning models},
+  author={Shan, Shawn and Wenger, Emily and Zhang, Jiayun and Li, Huiying and Zheng, Haitao and Zhao, Ben Y},
+  booktitle={29th USENIX security symposium (USENIX Security 20)},
+  pages={1589--1604},
+  year={2020}
+}
+
+@inproceedings{dong2019evading,
+  title={Evading defenses to transferable adversarial examples by translation-invariant attacks},
+  author={Dong, Yinpeng and Pang, Tianyu and Su, Hang and Zhu, Jun},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={4312--4321},
+  year={2019}
+}
+
+
+
+
+@article{munoz2023uncovering,
+  title={Uncovering bias in face generation models},
+  author={Mu{\~n}oz, Cristian and Zannone, Sara and Mohammed, Umar and Koshiyama, Adriano},
+  journal={arXiv preprint arXiv:2302.11562},
+  year={2023}
+}
+
+@inproceedings{karakas2022fairstyle,
+  title={Fairstyle: Debiasing stylegan2 with style channel manipulations},
+  author={Karakas, Cemre Efe and Dirik, Alara and Yal{\c{c}}{\i}nkaya, Eyl{\"u}l and Yanardag, Pinar},
+  booktitle={European Conference on Computer Vision},
+  pages={570--586},
+  year={2022},
+  organization={Springer}
+}
+
+@inproceedings{yu2025data,
+  title={Data Bias Mitigation and Evaluation Framework for Diffusion-based Generative Face Models},
+  author={Yu, Hao and Betke, Margrit and Bargal, Sarah Adel},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={300--310},
+  year={2025}
+}
+
+@article{perera2025unbiased,
+  title={Unbiased-Diff: Analyzing and Mitigating Biases in Diffusion Model-Based Face Image Generation},
+  author={Perera, Malsha V and Patel, Vishal M},
+  journal={IEEE Transactions on Biometrics, Behavior, and Identity Science},
+  year={2025},
+  publisher={IEEE}
+}
+
+@inproceedings{komkov2021advhat,
+  title={Advhat: Real-world adversarial attack on arcface face id system},
+  author={Komkov, Stepan and Petiushko, Aleksandr},
+  booktitle={2020 25th international conference on pattern recognition (ICPR)},
+  pages={819--826},
+  year={2021},
+  organization={IEEE}
+}
+
+@inproceedings{hu2022protecting,
+  title={Protecting facial privacy: Generating adversarial identity masks via style-robust makeup transfer},
+  author={Hu, Shengshan and Liu, Xiaogeng and Zhang, Yechao and Li, Minghui and Zhang, Leo Yu and Jin, Hai and Wu, Libing},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={15014--15023},
+  year={2022}
+}
+
+
+@article{yin2021adv,
+  title={Adv-makeup: A new imperceptible and transferable attack on face recognition},
+  author={Yin, Bangjie and Wang, Wenxuan and Yao, Taiping and Guo, Junfeng and Kong, Zelun and Ding, Shouhong and Li, Jilin and Liu, Cong},
+  journal={arXiv preprint arXiv:2105.03162},
+  year={2021}
+}
+
+
+@ARTICLE{Zeng,
+  author={Pi, Jiatian and Zeng, Junyi and Lu, Quan and Jiang, Ning and Wu, Haiying and Zeng, Linchengxi and Wu, Zhiyou},
+  journal={IEEE Access}, 
+  title={Adv-Eye: A Transfer-Based Natural Eye Makeup Attack on Face Recognition}, 
+  year={2023},
+  volume={11},
+  number={},
+  pages={89369-89382},
+  keywords={Face recognition;Perturbation methods;Visualization;Task analysis;Metalearning;Closed box;Training;Generative adversarial networks;Adversarial attack;generative adversarial networks;meta-learning;face recognition},
+  doi={10.1109/ACCESS.2023.3307132}}
+
+@inproceedings{zhu2019generating,
+  title={Generating adversarial examples by makeup attacks on face recognition},
+  author={Zhu, Zheng-An and Lu, Yun-Zhong and Chiang, Chen-Kuo},
+  booktitle={2019 IEEE International Conference on Image Processing (ICIP)},
+  pages={2516--2520},
+  year={2019},
+  organization={IEEE}
+}
+
+
+@article{heusel2017gans,
+  title={Gans trained by a two time-scale update rule converge to a local nash equilibrium},
+  author={Heusel, Martin and Ramsauer, Hubert and Unterthiner, Thomas and Nessler, Bernhard and Hochreiter, Sepp},
+  journal={Advances in neural information processing systems},
+  volume={30},
+  year={2017}
+}
+
+@inproceedings{gu2019ladn,
+  title={Ladn: Local adversarial disentangling network for facial makeup and de-makeup},
+  author={Gu, Qiao and Wang, Guanzhi and Chiu, Mang Tik and Tai, Yu-Wing and Tang, Chi-Keung},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={10481--10490},
+  year={2019}
+}
+
+@inproceedings{nie2022diffusion,
+  title     = {Diffusion Models for Adversarial Purification},
+  author    = {Nie, Weili and Guo, Brandon and Huang, Yujia and Xiao, Chaowei
+               and Vahdat, Arash and Anandkumar, Anima},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2022}
+}
+
+@inproceedings{lee2023robust,
+  author    = {Lee, Minjong and Kim, Dongwoo},
+  title     = {Robust Evaluation of Diffusion-Based Adversarial Purification},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2023},
+  pages     = {134--144}
+}
+
+@misc{labs2025flux1kontextflowmatching,
+      title={FLUX.1 Kontext: Flow Matching for In-Context Image Generation and Editing in Latent Space},
+      author={Black Forest Labs and Stephen Batifol and Andreas Blattmann and Frederic Boesel and Saksham Consul and Cyril Diagne and Tim Dockhorn and Jack English and Zion English and Patrick Esser and Sumith Kulal and Kyle Lacey and Yam Levi and Cheng Li and Dominik Lorenz and Jonas Müller and Dustin Podell and Robin Rombach and Harry Saini and Axel Sauer and Luke Smith},
+      year={2025},
+      eprint={2506.15742},
+      archivePrefix={arXiv},
+      primaryClass={cs.GR},
+      url={https://arxiv.org/abs/2506.15742},
+}
+
+@InProceedings{Rombach_2022_CVPR,
+    author    = {Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and Esser, Patrick and Ommer, Bj\"orn},
+    title     = {High-Resolution Image Synthesis With Latent Diffusion Models},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {10684-10695}
+}
+
+@inproceedings{zhang2018perceptual,
+  title={The Unreasonable Effectiveness of Deep Features as a Perceptual Metric},
+  author={Zhang, Richard and Isola, Phillip and Efros, Alexei A and Shechtman, Eli and Wang, Oliver},
+  booktitle={CVPR},
+  year={2018}
+}
+
+@inproceedings{cherti2023reproducible,
+  title={Reproducible scaling laws for contrastive language-image learning},
+  author={Cherti, Mehdi and Beaumont, Romain and Wightman, Ross and Wortsman, Mitchell and Ilharco, Gabriel and Gordon, Cade and Schuhmann, Christoph and Schmidt, Ludwig and Jitsev, Jenia},
+  booktitle={2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={2818--2829},
+  year={2023},
+  organization={IEEE}
+}
+
+@article{liu2023visual,
+  title={Visual instruction tuning},
+  author={Liu, Haotian and Li, Chunyuan and Wu, Qingyang and Lee, Yong Jae},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={34892--34916},
+  year={2023}
+}
+
+
+@inproceedings{yu2020cloudleak,
+  title={CloudLeak: Large-scale deep learning models stealing through adversarial examples.},
+  author={Yu, Honggang and Yang, Kaichen and Zhang, Teng and Tsai, Yun-Yun and Ho, Tsung-Yi and Jin, Yier},
+  booktitle={NDSS},
+  volume={38},
+  pages={102},
+  year={2020}
+}
