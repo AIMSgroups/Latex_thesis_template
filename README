@@ -2,12 +2,6 @@ USFthesis -- LaTeX thesis and dissertation template
 University of South Florida
 Bellini College of Artificial Intelligence, Cybersecurity and Computing
 
-Adapted by Nima Karimian from SJSUthesis.cls (David C. Anastasiu, San Jose
-State University), which is itself derived from IEEEtran.cls V1.8b (Michael
-Shell). This is a MODIFIED version, renamed per the LaTeX Project Public
-License; it is not the original SJSU class and is not endorsed by its
-original authors.
-
 Distributed under the LPPL v1.3, as-is and without warranty.
 
 
@@ -84,42 +78,6 @@ CLASS OPTIONS
   draft | final                           Default: final
 
 Example:  \documentclass[dissertation,5committee]{USFthesis}
-
-
--------------------------------------------------------------------------
-WHAT CHANGED FROM THE SJSU ORIGINAL
--------------------------------------------------------------------------
-
-1. Title page rebuilt to the USF format: title, "by", author, the degree
-   statement, concentration, department, college, university, committee
-   list, Date of Approval, Keywords, and the copyright line at the foot.
-
-2. The SJSU Library Rights Statement page was removed. USF handles
-   distribution rights through the ETD submission agreement.
-
-3. The typeset committee approval page was removed. USF files a separately
-   signed Certificate of Approval with the Graduate School; the committee
-   appears on the title page instead. \committeepage is retained as a no-op
-   so older documents still compile.
-
-4. The standalone copyright page is now opt-in (copyrightpage option),
-   since USF puts the copyright line on the title page.
-
-5. Added an About the Author page after the appendices.
-
-6. Front-matter order changed to USF's: title, dedication, acknowledgments,
-   abstract, table of contents, list of tables, list of figures.
-
-7. New metadata macros (see above) and a new "dissertation" class option.
-
-8. BUG FIX, not cosmetic: the upstream class set the TOC, LOF, and LOT
-   headings with \MakeUppercase\contentsname, \MakeUppercase\listfigurename,
-   and \MakeUppercase\listtablename. Under current LaTeX releases, applying
-   \MakeUppercase to those IEEEtran-defined names sends the compiler into an
-   infinite loop -- the build stalls silently just after the abstract page
-   with no error message. The headings are now written out literally. If you
-   copy any other heading from the upstream class, do not reintroduce that
-   pattern.
 
 
 -------------------------------------------------------------------------
